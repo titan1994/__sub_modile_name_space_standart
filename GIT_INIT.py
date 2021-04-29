@@ -67,7 +67,7 @@ if INIT_TRUE_OR_DELETE_FALSE:
 
     # Подключаем модули
     for sub_module, mpath in submodules.items():
-        run_with_info(f'git submodule add https://github.com/{ACCOUNT_NAME}/{sub_module} {GEN_MOD_FOLDER}/{mpath}')
+        run_with_info(f'git submodule add -f https://github.com/{ACCOUNT_NAME}/{sub_module} {GEN_MOD_FOLDER}/{mpath}')
 
         path_folder_module = Path(GEN_MOD_FOLDER) / mpath
         for dir_cl in dirs_clean:
@@ -94,7 +94,7 @@ else:
             print(exp)
 
     # Удаляем директорию модулей
-    try:
-        rmtree(Path(GEN_MOD_FOLDER))
-    except Exception as exp:
-        print(exp)
+    # try:
+    #     rmtree(Path(GEN_MOD_FOLDER))
+    # except Exception as exp:
+    #     print(exp)
