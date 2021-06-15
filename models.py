@@ -1,5 +1,6 @@
 from GENERAL_CONFIG import GeneralConfig
 from pathlib import Path
+from os import getenv
 
 
 def asf(name):
@@ -22,8 +23,12 @@ def get_project_prefix():
     Отсюда вот эта фича: Path(GeneralConfig.PROJECT_GENERAL_FOLDER.absolute()).name
     """
 
+    PROJECT_TABLE_NAMESPACE_PREFIX = getenv('PROJECT_TABLE_NAMESPACE_PREFIX')
+
     if getattr(GeneralConfig, 'PROJECT_TABLE_NAMESPACE_PREFIX', None):
         name_prefix = GeneralConfig.PROJECT_TABLE_NAMESPACE_PREFIX
+    elif PROJECT_TABLE_NAMESPACE_PREFIX:
+        name_prefix = PROJECT_TABLE_NAMESPACE_PREFIX
     else:
         name_prefix = Path(GeneralConfig.PROJECT_GENERAL_FOLDER.absolute()).name
 
