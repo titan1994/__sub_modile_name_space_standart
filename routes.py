@@ -4,6 +4,8 @@ from starlette.responses import Response
 import json
 from uuid import UUID
 from datetime import datetime
+from decimal import *
+
 
 class EncoderHelper(json.JSONEncoder):
     def default(self, obj):
@@ -13,7 +15,11 @@ class EncoderHelper(json.JSONEncoder):
         if isinstance(obj, datetime):
             # if the obj is datetime - return str
             return str(obj)
+        if isinstance(obj, Decimal):
+            # if the obj is decimal - return float
+            return float(obj)
         return json.JSONEncoder.default(self, obj)
+
 
 def standardize_response(func):
     """
